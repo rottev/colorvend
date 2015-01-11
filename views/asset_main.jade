@@ -1,0 +1,39 @@
+// Jade
+!= "<script type='text/javascript'>"
+!= "var adder ='" + val.assetaddr +"';"
+!= "</script>"
+
+script
+  | var ResInterval = window.setInterval('getAssetPrice()', 1000);
+  | var getAssetPrice = function() {
+  | $.ajax({
+  |      type: "GET",
+  |      url: "/price/" + adder,
+  |      contentType: "application/json",
+  |      dataType: "json",
+  |      success: function(json) {
+  |           console.log("got price");
+  |           $('#buy').text("Buy: " +json.bid);
+  |           $('#sell').text("Sell: " +json.ask);
+  |      }
+  |  });
+  | }
+.asset
+  block asset
+    .name
+      div
+        div
+          | #{val.metadata.name}
+        div
+          | Address: #{val.assetaddr}
+    .rates
+      div
+        div#buy
+          | Buy: #{val.buy}
+        div#sell
+          | Sell: #{val.sell}
+
+    .descritption
+      div
+        | #{val.metadata.description}
+br

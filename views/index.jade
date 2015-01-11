@@ -1,0 +1,18 @@
+// Jade
+extend layout
+block content
+  h1
+      | Availble assets for trading
+  each val in assets
+    include asset_main.jade
+br
+block sidebar
+  .widget
+    h1 Information
+    p
+      | these assts are linked to contracts availble
+      | in 
+      a(href='www.etoro.com') eToro
+    p
+      | sending bitcoin to an adress will buy an asset
+      | sending an asset to an adress will sell the asset
